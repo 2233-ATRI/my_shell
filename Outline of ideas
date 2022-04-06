@@ -1,0 +1,8 @@
+为每一个特殊的情况进行判断，即对于管道，输入输出，后台运行，还有cd的判断
+对于要求的内存泄露的问题，可以通过链表的方法进行增加内存，或者进行malloc进行需要内存的判断
+对于一些检测一些信号（如ctrl + c不能触发）一类的条件可以通过强制的要求进行暂停
+外观漂亮可以借用ls的部分代码进行改变，从而对于部分特殊的文件类型进行颜色的改变
+
+对于gdb调试的运行
+https://blog.csdn.net/chen1415886044/article/details/105094688?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164926469216780271967985%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164926469216780271967985&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-105094688.142^v5^pc_search_quality_down,157^v4^new_style&utm_term=gdb&spm=1018.2226.3001.4187
+
