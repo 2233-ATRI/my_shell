@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+ 
+#define BUFFSIZE       512
+#define ERRORMSG()     {printf("Line %d:operation failed\n",__LINE__);}
+#define SUCCESSMSG()   {printf("operation successfully\n");}
+ 
+ 
+int main(int argc,char *argv[])
+{
+	int inFd = -1;
+	char fileBuf[BUFFSIZE];
+	memset(fileBuf,0,sizeof(fileBuf));
+ 
+	inFd = open("./uart_test.c",O_RDONLY);
+	if(-1 == inFd)
+	{
+		ERRORMSG();
+		return -1;
+	}
+ 
+	SUCCESSMSG();
+ 
+	int outFd = -1;
+	outFd = open("./out.c",O_CREAT|O_TRUNC|O_WRONLY,0777);
+	if(-1 == outFd)
+	{
+		ERRORMSG();
+		return -1;
+	}
+ 
+	SUCCESSMSG();
+ 
+	int retData  = 0;
+	while(retData = read(inFd,fileBuf,BUFFSIZE-1))
+	{
+		static int ret = 0;
+		ret += retData;
+		lseek(inFd,SEEK_SET,ret);
+		printf("%s",fileBuf);
+ 
+		write(outFd,fileBuf,strlen(fileBuf));
+		memset(fileBuf,0,BUFFSIZE);
+ 
+	}
+ 
+	close(outFd);
+	close(inFd);
+	
+	return 0;
+}
